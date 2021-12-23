@@ -10,14 +10,26 @@ async function scrapeData() {
         
         const $ = cheerio.load(data);
         
-        const listItems = $(".list_wrap ul li")
+        const listItems = $(".provider")
+
+        // console.log(listItems);
 
         const companies = [];
 
-        listItems.each((idx, el) => {
-            const company = { title: "", profile_page_url: "", image_url: "", description: "" };
+        // listItems.each((idx, el) => {
+        //     console.log(el);
 
-            company.title = $(el).children("")
+        //     const company = { title: "", profile_page_url: "", image_url: "", description: "" };
+
+        //     company.title = $(el).children("")
+        // })
+        $(".profile_title").each(function(i, elm) {
+         console.log($(this).text());   
         })
-    }
+
+    } catch (err) {
+        console.error(err);
+      }
 }
+
+scrapeData();
