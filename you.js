@@ -18,11 +18,11 @@ async function scrapeData() {
             
             const company = { profile_page_url: "", title: "", image_url: "", description: "" };
 
-            company.profile_page_url = $(el).children("h3.company_info a").url();
+            company.profile_page_url = $(el).children("h3.company_info a").attr("href");
 
             company.title = $(el).children("h3.company_info a").text();
 
-            company.image_url = $(el).children("img").image_url();
+            company.image_url = $(el).children("img").attr("src");
 
             company.description = $(el).children("p.company_info_wrap").text();
 
