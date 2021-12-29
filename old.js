@@ -22,7 +22,13 @@ async function scrapeData() {
 
             company.title = $(el).children("h3").text().trim();
 
-            company.image_url = $(el).children(".img").attr("src");
+            // company.image_url = $(el).children(".img").attr("src");
+
+            company.image_url = $(el).find('img')[0].attribs['data-src'] 
+            //.find looks for all img and makes an array
+            //[0] is the index selector of it
+            //.attribs is object attributes raw JS
+            //['data--src'] is the hidden class
 
             company.description = $(el).children("p.company_info_wrap").text();
 
