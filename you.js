@@ -10,7 +10,7 @@ async function scrapeData() {
         
         const $ = cheerio.load(data);
         
-        const listItems = $(".list_wrap ul li");
+        const listItems = $(".company");
 
         const companies = [];
 
@@ -18,9 +18,9 @@ async function scrapeData() {
             
             const company = { profile_page_url: "", title: "", image_url: "", description: "" };
 
-            company.profile_page_url = $(el).children("h3.company_info a").attr("href");
+            company.profile_page_url = $(el).children("a").attr("href");
 
-            company.title = $(el).children("a").text();
+            company.title = $(el).children("h3").text().trim();
 
             company.image_url = $(el).children(".img").attr("src");
 
@@ -39,7 +39,7 @@ async function scrapeData() {
         //         return;
         //     }
         //     console.log("successfully written data to file");
-        };
+        // };
     } catch (err) {
         console.error(err);
     }
