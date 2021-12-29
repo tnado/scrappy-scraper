@@ -10,33 +10,35 @@ async function scrapeData() {
         
         const $ = cheerio.load(data);
         
-        const listItems = $("h3.company_info");
+        const listItems = $(".list_wrap ul li");
 
         const companies = [];
 
         listItems.each((idx, el) => {
             
-            const company = { title: "" };
+            const company = { profile_page_url: "", title: "", image_url: "", description: "" };
 
-            // company.profile_page_url = $(el).children("h3.company_info a").attr("href");
+            company.profile_page_url = $(el).children("h3.company_info a").attr("href");
 
             company.title = $(el).children("a").text();
 
-            // company.image_url = $(el).children("img").attr("src");
+            company.image_url = $(el).children(".img").attr("src");
 
-            // company.description = $(el).children("p.company_info_wrap").text();
+            company.description = $(el).children("p.company_info_wrap").text();
 
             companies.push(company);
         });
 
-        console.dir(companies)
+            console.log(companies);
 
-        fs.writeFile("companies.json"), JSON.stringify(companies, null, 2), (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            console.log("successfully written data to file");
+        // console.dir(companies)
+
+        // fs.writeFile("companies.json"), JSON.stringify(companies, null, 2), (err) => {
+        //     if (err) {
+        //         console.error(err);
+        //         return;
+        //     }
+        //     console.log("successfully written data to file");
         };
     } catch (err) {
         console.error(err);
